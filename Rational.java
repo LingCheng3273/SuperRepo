@@ -1,8 +1,3 @@
-//Team HomeAlone-- Ling Cheng, Andrea Ma
-//APCS1 pd10
-//HW #41: In America, the Driver Sits on the Left
-//2015-12-03
-
 public class Rational{
 
     //Instance Variables

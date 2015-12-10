@@ -1,8 +1,3 @@
-// Team Array of Light -- Ling Cheng, William Xiang
-// APCS1 Pd 10
-// HW40 -- Array of Grade 316
-// 2015-12-2
-
 /*****************************
  * SKELETON for
  * class SuperArray --  A wrapper class for an array. 

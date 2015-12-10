@@ -1,9 +1,3 @@
-//Ling Cheng
-//APCS1 pd10
-//HW #43: This or That
-//2015-12-07
-//skeleton file for class Binary
-
 //binary-> decimal: index value*2^distance from right
 //decimal -> binary: divide decimal by 2, remainder is rightmost value and recurse quotient
 

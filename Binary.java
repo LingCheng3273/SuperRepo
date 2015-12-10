@@ -149,8 +149,10 @@ public class Binary implements Comparable{
 	    return this._decNum- ((Hexadecimal)other).getDec();
 	if (other instanceof Binary)
 	    return this._decNum- ((Binary)other).getDec();
-
-	System.out.println("Error: compareTo() input is not Binary or Hexadecimal");
+	if (other instanceof Rational)
+	    return this._decNum*((Rational)other).getDen()- ((Rational)other).getNum();
+	
+	System.out.println("Error: compareTo() input is not Binary, Hexadecimal, or Rational");
 	return -100000;
     }
     

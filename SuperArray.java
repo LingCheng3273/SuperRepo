@@ -132,7 +132,11 @@ public class SuperArray{
 	SuperArray test0= new SuperArray();
 	Comparable test1= new Binary(6);
 	Comparable test2= new Hexadecimal(5);
-	
+	Binary test3= null;
+	Comparable test4= new Rational(12, 2);
+
+	System.out.println(test1.compareTo(test4));
+	/*
 	System.out.println(test1);
 	System.out.println(test2);
 	test0.add(test1);
@@ -146,6 +150,7 @@ public class SuperArray{
 	System.out.println(test0);
 	test0.add(1, test1);
 	System.out.println(test0);
+	System.out.println(test1.compareTo(test3));*/
     }//end main
 		
 }//end class

@@ -152,7 +152,16 @@ public class Hexadecimal implements Comparable{
 	    throw new ClassCastException("\ncompareTo() input not a Comparable");
 	if (other == null)
 	    throw new NullPointerException("\ncompareTo() has no input");
-	return this._decNum- ((Hexadecimal)other)._decNum;
+
+	if (other instanceof Hexadecimal)
+	    return this._decNum- ((Hexadecimal)other).getDec();
+	if (other instanceof Binary)
+	    return this._decNum- ((Binary)other).getDec();
+	if (other instanceof Rational)
+	    return this._decNum*((Rational)other).getDen()- ((Rational)other).getNum();
+	
+	System.out.println("Error: compareTo() input is not Binary, Hexadecimal, or Rational");
+	return -100000;
     }
 
 

@@ -1,4 +1,4 @@
-public class Rational{
+public class Rational implements Comparable{
 
     //Instance Variables
     private int num;
@@ -22,6 +22,14 @@ public class Rational{
         }
     }
 
+    //accessors
+    public int getNum(){
+	return num;
+    }
+
+    public int getDen(){
+	return den;
+    }
     //Methods
 
     //returns Rational as "a/b" (e.g. "1/2")
@@ -111,18 +119,6 @@ public class Rational{
         return ret;
     }
 
-    /*Original compareTo method
-      public int compareTo(Rational R) {
-      int dif= num*R.den-R.num*den;
-      if (dif > 0){
-      return 1;
-      }else if(dif < 0){
-      return -1;
-      } else{
-      return 0;
-      }
-      }*/
-
     //PHASE IV
 
     public boolean equals(Rational R){
@@ -143,23 +139,21 @@ public class Rational{
         }
     }
 
-    //Interface
-    public int compareTo(Object o){
-	int ret;
-	if (this instanceof Rational && o instanceof Rational){
-	    int dif= num*((Rational)o).den-((Rational)o).num*den;
-	    if (dif > 0){
-		ret= 1;
-	    }else if(dif < 0){
-		ret= -1;
-	    } else{
-		ret= 0;
-	    }
-	}else{
-	    System.out.println( "Error: Objects are not of the same type");
-	    ret= -2;
-	}
-	return ret;
+    public int compareTo( Object other ) {
+	if (!(other instanceof Comparable))
+	    throw new ClassCastException("\ncompareTo() input not a Comparable");
+	if (other == null)
+	    throw new NullPointerException("\ncompareTo() has no input");
+
+	if (other instanceof Hexadecimal)
+	    return num- ((Hexadecimal)other).getDec()*den;
+	if (other instanceof Binary)
+	    return num- ((Binary)other).getDec()*den;
+	if (other instanceof Rational)
+	    return num*((Rational)other).getDen()-((Rational)other).getNum()*den;
+	
+	System.out.println("Error: compareTo() input is not Binary, Hexadecimal, or Rational");
+	return -100000;
     }
 
     //main method -- Diagnostics

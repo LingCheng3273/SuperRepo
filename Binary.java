@@ -43,7 +43,7 @@ public class Binary implements Comparable{
       post: returns String of 1's and 0's representing value of this Object
       =====================================*/
     public String toString() { 
-	return "Decimal: "+ _decNum+"\nBinary: "+_binNum;
+	return _binNum+ " Base 2";
     }
     /*=====================================
       String decToBin(int) -- converts base-10 input to binary

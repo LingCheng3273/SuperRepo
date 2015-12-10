@@ -43,7 +43,7 @@ public class Hexadecimal implements Comparable{
       post: returns String of 1's and 0's representing value of this Object
       =====================================*/
     public String toString() { 
-	return "Decimal: "+ _decNum+"\nHexadecimal: "+_hexNum;
+	return _hexNum+ " Base 16";
     }
 
     //accessor

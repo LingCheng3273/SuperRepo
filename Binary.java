@@ -1,11 +1,10 @@
 //binary-> decimal: index value*2^distance from right
 //decimal -> binary: divide decimal by 2, remainder is rightmost value and recurse quotient
 
-public class Binary {
+public class Binary implements Comparable{
 
     private int _decNum;
     private String _binNum;
-
 
     /*=====================================
       default constructor
@@ -13,43 +12,39 @@ public class Binary {
       post: initializes _decNum to 0, _binNum to "0"
       =====================================*/
     public Binary() { 
-	    _decNum= 0;
-	    _binNum= "0";
+	_decNum= 0;
+	_binNum= "0";
     }
-
-
     /*=====================================
       overloaded constructor
       pre:  n >= 0
       post: sets _decNum to n, _binNum to equiv string of bits
       =====================================*/
     public Binary( int n ) {
-	    _decNum= n;
-	    _binNum= decToBin(n);
+	_decNum= n;
+	_binNum= decToBin(n);
     }
-
-
     /*=====================================
       overloaded constructor
       pre:  s is String representing non-negative binary number
       post: sets _binNum to input, _decNum to decimal equiv
       =====================================*/
     public Binary( String s ) {
-	    _binNum= s;
-	    _decNum= binToDec(s);
+	_binNum= s;
+	_decNum= binToDec(s);
     }
-
-
+    //accessor
+    public int getDec(){
+	return _decNum;
+    }
     /*=====================================
       String toString() -- returns String representation of this Object
       pre:  n/a
       post: returns String of 1's and 0's representing value of this Object
       =====================================*/
     public String toString() { 
-	    return "Decimal: "+ _decNum+"\nBinary: "+_binNum;
+	return "Decimal: "+ _decNum+"\nBinary: "+_binNum;
     }
-
-
     /*=====================================
       String decToBin(int) -- converts base-10 input to binary
       pre:  n >= 0
@@ -61,15 +56,13 @@ public class Binary {
       decToBin(14) -> "1110"
       =====================================*/
     public static String decToBin( int n ) {
-      String ans= "";
-      while (n != 0){
-        ans= n%2 + ans;
-        n= n/2;
-      }
-      return ans;
+	String ans= "";
+	while (n != 0){
+	    ans= n%2 + ans;
+	    n= n/2;
+	}
+	return ans;
     }
-
-
     /*=====================================
       String decToBinR(int) -- converts base-10 input to binary, recursively
       pre:  n >= 0
@@ -82,13 +75,12 @@ public class Binary {
       =====================================*/
     public static String decToBinR( int n ) { 
 	/****** YOUR IMPLEMENTATION HURRR ******/   
-	    String ans= "";
-	    if (n< 1)
-	      return n+"";
-	    ans+= decToBinR(n/2)+decToBinR(n % 2);
-	    return ans;
+	String ans= "";
+	if (n< 1)
+	    return n+"";
+	ans+= decToBinR(n/2)+decToBinR(n % 2);
+	return ans;
     }
-
     /*=====================================
       String binToDec(String) -- converts binary input to base-10
       pre:  s represents non-negative binary number
@@ -101,15 +93,13 @@ public class Binary {
       binToDec("1110") -> 14
       =====================================*/
     public static int binToDec( String s ) {
-      int _decimal= 0;
-      for (int i= 0; i< s.length(); i++){
-	      int temp= Integer.parseInt(s.substring(i, i+1));
-	      _decimal+= temp* Math.pow(2, s.length()-i-1);
-	    } 
-	    return _decimal;
+	int _decimal= 0;
+	for (int i= 0; i< s.length(); i++){
+	    int temp= Integer.parseInt(s.substring(i, i+1));
+	    _decimal+= temp* Math.pow(2, s.length()-i-1);
+	} 
+	return _decimal;
     }
-
-
     /*=====================================
       String binToDecR(String) -- converts binary input to base-10, recursively
       pre:  s represents non-negative binary number
@@ -123,15 +113,13 @@ public class Binary {
       =====================================*/
     public static int binToDecR( String s ) { 
 	/****** YOUR IMPLEMENTATION HURRR ******/   
-	    int ans= 0;
-	    int firstNum= Integer.parseInt(s.substring(0,1));
-	    if (s.length()==1)
-	      return firstNum;
-	    ans+= firstNum*Math.pow(2, s.length()-1)+binToDecR(s.substring(1));
-	    return ans;
+	int ans= 0;
+	int firstNum= Integer.parseInt(s.substring(0,1));
+	if (s.length()==1)
+	    return firstNum;
+	ans+= firstNum*Math.pow(2, s.length()-1)+binToDecR(s.substring(1));
+	return ans;
     }
-
-
     /*=============================================
       boolean equals(Object) -- tells whether 2 Objs are equivalent
       pre:  other is an instance of class Binary
@@ -139,14 +127,12 @@ public class Binary {
       Object), or if this and other represent equal binary values
       =============================================*/
     public boolean equals( Object other ) { 
-	    if (other instanceof Binary)
-	      return this._binNum.equals(((Binary)other)._binNum);
-	    System.out.println("Classes don't match");
-	    return false;
+	if (other instanceof Binary)
+	    return this._binNum.equals(((Binary)other)._binNum);
+	System.out.println("Classes don't match");
+	return false;
 	    
     }
-
-
     /*=============================================
       int compareTo(Object) -- tells which of two Binary objects is greater
       pre:  other is instance of class Binary
@@ -154,18 +140,29 @@ public class Binary {
       negative integer if this<input, positive integer otherwise
       =============================================*/
     public int compareTo( Object other ) {
-	/****** YOUR IMPLEMENTATION HURRR ******/   
-	    if (other instanceof Binary){
-	      return this._decNum- ((Binary)other)._decNum;
-	    }
-	    System.out.println("Error: classes don't match");
-	    return -1000000;
+	if (!(other instanceof Comparable))
+	    throw new ClassCastException("\ncompareTo() input not a Comparable");
+	if (other == null)
+	    throw new NullPointerException("\ncompareTo() has no input");
+
+	if (other instanceof Hexadecimal)
+	    return this._decNum- ((Hexadecimal)other).getDec();
+	if (other instanceof Binary)
+	    return this._decNum- ((Binary)other).getDec();
+
+	System.out.println("Error: compareTo() input is not Binary or Hexadecimal");
+	return -100000;
     }
-
-
+    
     //main method for testing
     public static void main( String[] args ) {
+	Comparable test= new Binary(6);
+	Comparable test2= new Hexadecimal(5);
 	
+	System.out.println(test);
+	System.out.println(test2);
+	System.out.println(test.compareTo(test2));
+	/*
 	System.out.println();
 	System.out.println( "Testing ..." );
 
@@ -195,7 +192,7 @@ public class Binary {
 	System.out.println( b1.compareTo(b3) ); //should be 0
 	System.out.println( b1.compareTo(b4) ); //should be neg
 	System.out.println( b4.compareTo(b1) ); //should be pos
-	  
+	*/
     }//end main()
 
 } //end class

@@ -1,7 +1,7 @@
 //hexadecimal-> decimal: index value*16^distance from right
 //decimal -> hexadecimal: divide decimal by 16, remainder is rightmost value and recurse quotient
 
-public class Hexadecimal {
+public class Hexadecimal implements Comparable{
 
     private final static String HEXDIGITS= "0123456789ABCDEF";
     private int _decNum;
@@ -46,6 +46,10 @@ public class Hexadecimal {
 	return "Decimal: "+ _decNum+"\nHexadecimal: "+_hexNum;
     }
 
+    //accessor
+    public int getDec(){
+	return _decNum;
+    }
     /*=====================================
       String decToHex(int) -- converts base-10 input to hexary
       pre:  n >= 0
@@ -75,13 +79,13 @@ public class Hexadecimal {
       decToHexR(3) -> "11"
       decToHexR(14) -> "1110"
       =====================================*/
-     public static String decToHexR( int n ) {
+    public static String decToHexR( int n ) {
 	String ans= "";
 	if (n<= 15)
 	    return HEXDIGITS.substring(n, n+1);
 	ans+= decToHexR(n/16)+decToHexR(n % 16);
 	return ans;
-	}
+    }
 
     /*=====================================
       String hexToDec(String) -- converts hexadecimal input to base-10
@@ -144,26 +148,32 @@ public class Hexadecimal {
       negative integer if this<input, positive integer otherwise
       =============================================*/
     public int compareTo( Object other ) {
-	if (!(other instanceof Hexadecimal))
-	    throw new ClassCastException("\nMy first error message!"+
-					 "compareTo() input not a hexadecimal");
-	else
-	    return this._decNum- ((Hexadecimal)other)._decNum;
+	if (!(other instanceof Comparable))
+	    throw new ClassCastException("\ncompareTo() input not a Comparable");
+	if (other == null)
+	    throw new NullPointerException("\ncompareTo() has no input");
+	return this._decNum- ((Hexadecimal)other)._decNum;
     }
 
 
     //main method for testing
     public static void main( String[] args ) {
-	/*
-	Hexadecimal test= new Hexadecimal(10);
+	Comparable test= new Binary(6);
+	Comparable test2= new Hexadecimal(5);
+	
 	System.out.println(test);
-       	Hexadecimal test2= new Hexadecimal("A");
 	System.out.println(test2);
+	System.out.println(test.compareTo(test2));
+	/*
+	  Hexadecimal test= new Hexadecimal(10);
+	  System.out.println(test);
+	  Hexadecimal test2= new Hexadecimal("A");
+	  System.out.println(test2);
 	
-	System.out.println(test.equals(test2));
-	System.out.println(test.equals(2));
+	  System.out.println(test.equals(test2));
+	  System.out.println(test.equals(2));
 	*/
-	
+	/*
 	System.out.println();
 	System.out.println( "Testing ..." );
 
@@ -192,7 +202,7 @@ public class Hexadecimal {
 	System.out.println( b1.compareTo(b2) ); //should be 0
 	System.out.println( b1.compareTo(b3) ); //should be 0
 	System.out.println( b1.compareTo(b4) ); //should be neg
-	System.out.println( b4.compareTo(b1) ); //should be pos
+	System.out.println( b4.compareTo(b1) ); //should be pos*/
 	
     }//end main()
 

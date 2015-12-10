@@ -128,14 +128,34 @@ public class SuperArray{
     //return number of meaningful items in _data
     public int size() { return _size;}
 
+
+    public int linSearch(Comparable c){
+	for (int i=0; i< _size; i++){
+	    if (_data[i]==c)
+		return i;
+	}
+	return -1;
+    }
+    public boolean isSorted(){
+	if (_size== 1)
+	    return true;
+	for (int i = 1; i< _size; i++){
+	    if (_data[i].compareTo(_data[i-1])< 0)
+		return false;
+	}
+	return true;
+    }
     public static void main( String[] args ) {
 	SuperArray test0= new SuperArray();
-	Comparable test1= new Binary(6);
-	Comparable test2= new Hexadecimal(5);
+	Comparable test1= new Binary("10");
+	Comparable test2= new Hexadecimal("2");
 	Binary test3= null;
-	Comparable test4= new Rational(12, 2);
-
+	Comparable test4= new Rational(6, 3);
+	/*
+	System.out.println(test1.compareTo(test2));
 	System.out.println(test1.compareTo(test4));
+	System.out.println(test2.compareTo(test4));
+	System.out.println(test4.compareTo(test2));*/
 	/*
 	System.out.println(test1);
 	System.out.println(test2);
@@ -151,6 +171,13 @@ public class SuperArray{
 	test0.add(1, test1);
 	System.out.println(test0);
 	System.out.println(test1.compareTo(test3));*/
+	test0.add(test2);
+	test0.add(test2);
+	test0.add(test1);
+	test0.add(test2);
+	System.out.println(test0);
+	System.out.println(test0.linSearch(test1));
+	System.out.println(test0.isSorted());
     }//end main
 		
 }//end class

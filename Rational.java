@@ -140,10 +140,10 @@ public class Rational implements Comparable{
     }
 
     public int compareTo( Object other ) {
-	if (!(other instanceof Comparable))
-	    throw new ClassCastException("\ncompareTo() input not a Comparable");
 	if (other == null)
 	    throw new NullPointerException("\ncompareTo() has no input");
+	if (!(other instanceof Comparable))
+	    throw new ClassCastException("\ncompareTo() input not a Comparable");
 
 	if (other instanceof Hexadecimal)
 	    return num- ((Hexadecimal)other).getDec()*den;
